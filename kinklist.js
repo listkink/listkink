@@ -83,7 +83,7 @@ $(function(){
                         .data('levelInt', i)
                         .attr('title', levels[i])
                         .appendTo($container)
-                        .on('click touchstart ', function(){
+                        .on('click touchstart', function(){
                             $container.find('button').removeClass('selected');
                             $(this).addClass('selected');
                         });
@@ -161,7 +161,7 @@ $(function(){
             inputKinks.placeCategories($categories);
 
             // Make things update hash
-            $('#InputList').find('button.choice').on('click touchstart ', function(){
+            $('#InputList').find('button.choice').on('click touchstart', function(){
                 location.hash = inputKinks.updateHash();
             });
         },
@@ -173,8 +173,8 @@ $(function(){
             inputKinks.parseHash();
 
             // Make export button work
-            $('#Export').on('click touchstart ', inputKinks.export);
-            $('#URL').on('click touchstart ', function(){ this.select(); });
+            $('#Export').on('click touchstart', inputKinks.export);
+            $('#URL').on('click touchstart', function(){ this.select(); });
 
             // On resize, redo columns
             (function(){
@@ -638,15 +638,15 @@ $(function(){
         }					
     };
 
-    $('#Edit').on('click touchstart ', function(){
+    $('#Edit').on('click touchstart', function(){
         var KinksText = inputKinks.inputListToText();
         $('#Kinks').val(KinksText.trim());
         $('#EditOverlay').fadeIn();
     });
-    $('#EditOverlay').on('click touchstart ', function(){
+    $('#EditOverlay').on('click touchstart', function(){
         $(this).fadeOut();
     });
-    $('#KinksOK').on('click touchstart ', function(){
+    $('#KinksOK').on('click touchstart', function(){
         var selection = inputKinks.saveSelection();
         try {
             var kinksText = $('#Kinks').val();
@@ -660,18 +660,18 @@ $(function(){
         inputKinks.restoreSavedSelection(selection);
         $('#EditOverlay').fadeOut();
     });
-    $('.overlay > *').on('click touchstart ', function(e){
+    $('.overlay > *').on('click touchstart', function(e){
         e.stopPropagation();
     });
-    $('#DescriptionOverlay').on('click touchstart ', function(){
+    $('#DescriptionOverlay').on('click touchstart', function(){
         $(this).fadeOut();
     });
-    $('#Description').on('click touchstart ', function(){
+    $('#Description').on('click touchstart', function(){
         $('#DescriptionOverlay').fadeOut();
     });
 
     function showDescriptionButton(description, attachElement) {
-        $('<Button />', { "class": 'KinkDesc',  click touchstart : function() {
+        $('<Button />', { "class": 'KinkDesc',  click: function() {
                                                     $('#Description').text(description);
                                                     $('#DescriptionOverlay').fadeIn();} 
         }).appendTo(attachElement);
@@ -768,7 +768,7 @@ $(function(){
                         $btn.addClass('selected');
                     }
 
-                    $btn.on('click touchstart ', function(){
+                    $btn.on('click touchstart', function(){
                         $container.find('.big-choice').removeClass('selected');
                         $btn.addClass('selected');
                         kink.value = text;
@@ -777,7 +777,7 @@ $(function(){
                             inputKinks.inputPopup.showNext();
                         });
                         var choiceClass = strToClass(text);
-                        kink.$choices.find('.' + choiceClass).click touchstart ();
+                        kink.$choices.find('.' + choiceClass).click();
                     });
                 });
                 return $container;
@@ -813,7 +813,7 @@ $(function(){
                     var $prevKink = inputKinks.inputPopup.generateSecondary(prevKink);
                     $previous.append($prevKink);
                     (function(skip){
-                        $prevKink.on('click touchstart ', function(){
+                        $prevKink.on('click touchstart', function(){
                             inputKinks.inputPopup.showPrev(skip);
                         });
                     })(i);
@@ -824,7 +824,7 @@ $(function(){
                     var $nextKink = inputKinks.inputPopup.generateSecondary(nextKink);
                     $next.append($nextKink);
                     (function(skip){
-                        $nextKink.on('click touchstart ', function(){
+                        $nextKink.on('click touchstart', function(){
                             inputKinks.inputPopup.showNext(skip);
                         });
                     })(i);
@@ -878,10 +878,10 @@ $(function(){
             }
 
             var $btn = $options.find('.big-choice').eq(btn);
-            $btn.click touchstart ();
+            $btn.click();
         });
-        $('#StartBtn').on('click touchstart ', inputKinks.inputPopup.show);
-        $('#InputCurrent .closePopup, #InputOverlay').on('click touchstart ', function(){
+        $('#StartBtn').on('click touchstart', inputKinks.inputPopup.show);
+        $('#InputCurrent .closePopup, #InputOverlay').on('click touchstart', function(){
             $popup.fadeOut();
         });                    
     })();
