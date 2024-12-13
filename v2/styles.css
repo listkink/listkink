@@ -14,15 +14,23 @@
 
 /* Custom radio button visual (span) */
 .radio-custom {
+    border-collapse: collapse;
     width: 15px;
     height: 15px;
-    border-radius: 50%;
-    display: inline-block;
-    border: 1px solid black;
-    position: relative;
+    aspect-ratio: 1 / 1; /* Ensures it stays a perfect square */
+    border-radius: 50%; /* Turns the square into a circle */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
     cursor: pointer;
-    transition: all 0.3s ease; /* Smooth transition for color changes */
+    transition: all 0.3s ease;
+    margin-left: 10px;
 }
+
 
 /* Colors for custom radio buttons (faded) */
 .radio-white {
