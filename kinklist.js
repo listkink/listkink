@@ -651,8 +651,9 @@ $(function(){
         history.scrollRestoration = 'manual'; // Prevent automatic scroll restoration
     }
 
-    
+
     $('#Edit').on('click touchstart', function(){
+        e.preventDefault();
         var KinksText = inputKinks.inputListToText();
         $('#Kinks').val(KinksText.trim());
         $('#EditOverlay').fadeIn();
@@ -662,6 +663,7 @@ $(function(){
         $(this).fadeOut();
     });
     $('#KinksOK').on('click touchstart', function(){
+        e.preventDefault();
         var selection = inputKinks.saveSelection();
         try {
             var kinksText = $('#Kinks').val();
@@ -680,9 +682,11 @@ $(function(){
         e.stopPropagation();
     });
     $('#DescriptionOverlay').on('click touchstart', function(){
+        e.preventDefault();
         $(this).fadeOut();
     });
     $('#Description').on('click touchstart', function(){
+        e.preventDefault();
         $('#DescriptionOverlay').fadeOut();
     });
 
@@ -785,6 +789,7 @@ $(function(){
                     }
 
                     $btn.on('click touchstart', function(){
+                        e.preventDefault();
                         $container.find('.big-choice').removeClass('selected');
                         $btn.addClass('selected');
                         kink.value = text;
@@ -830,6 +835,7 @@ $(function(){
                     $previous.append($prevKink);
                     (function(skip){
                         $prevKink.on('click touchstart', function(){
+                            e.preventDefault();
                             inputKinks.inputPopup.showPrev(skip);
                         });
                     })(i);
@@ -841,6 +847,7 @@ $(function(){
                     $next.append($nextKink);
                     (function(skip){
                         $nextKink.on('click touchstart', function(){
+                            e.preventDefault();
                             inputKinks.inputPopup.showNext(skip);
                         });
                     })(i);
@@ -898,6 +905,7 @@ $(function(){
         });
         $('#StartBtn').on('click touchstart', inputKinks.inputPopup.show);
         $('#InputCurrent .closePopup, #InputOverlay').on('click touchstart', function(){
+            e.preventDefault();
             $popup.fadeOut();
         });                    
     })();
