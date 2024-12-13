@@ -165,7 +165,7 @@ $(function(){
                 return false; // Prevents scrolling
             }, false);
 
-            
+
             // Make things update hash
             $('#InputList').find('button.choice').on('click touchstart', function(){
                 location.hash = inputKinks.updateHash();
@@ -647,6 +647,11 @@ $(function(){
         }					
     };
 
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual'; // Prevent automatic scroll restoration
+    }
+
+    
     $('#Edit').on('click touchstart', function(){
         var KinksText = inputKinks.inputListToText();
         $('#Kinks').val(KinksText.trim());
