@@ -159,16 +159,12 @@ $(function(){
                 $categories.push($category);
             }
             inputKinks.placeCategories($categories);
-            
-            window.addEventListener('hashchange', function(e) {
-                e.preventDefault();
-                return false; // Prevents scrolling
-            }, false);
 
 
             // Make things update hash
             $('#InputList').find('button.choice').on('click touchstart', function(){
-                location.hash = inputKinks.updateHash();
+                localStorage.setItem('kinklistHash', inputKinks.updateHash());
+
             });
         },
         init: function(){
@@ -526,7 +522,7 @@ $(function(){
             output.reverse();
             return output;
         },
-        updateHash: function(){
+        updateHash: function() {
             var hashValues = [];
             $('#InputList .choices').each(function(){
                 var $this = $(this);
@@ -534,23 +530,14 @@ $(function(){
                 if(!lvlInt) lvlInt = 0;
                 hashValues.push(lvlInt);
             });
-        
-            // Store the current scroll position before updating the hash
-            var scrollPos = window.pageYOffset;
-        
-            // Call the encode function, and if it updates the window hash, this will prevent scrolling
             var newHash = inputKinks.encode(Object.keys(colors).length, hashValues);
         
-            // Update the hash without scrolling to the top
-            window.location.hash = newHash;
-        
-            // Restore the scroll position
-            window.scrollTo(0, scrollPos);
+            localStorage.setItem('kinklistHash', newHash); // Change this line
         },
-        parseHash: function(){
-            var hash = location.hash.substring(1);
+        parseHash: function() {
+            var hash = localStorage.getItem('kinklistHash') || ''; // Change this line
             if(hash.length < 10) return;
-
+        
             var values = inputKinks.decode(Object.keys(colors).length, hash);
             var valueIndex = 0;
             $('#InputList .choices').each(function(){
@@ -599,7 +586,7 @@ $(function(){
                     var selector = selection[i];
                     $(selector).addClass('selected');
                 }
-                location.hash = inputKinks.updateHash();
+                localStorage.setItem('kinklistHash', inputKinks.updateHash()); // Change this line
             }, 300);
         },
         parseKinksText: function(kinksText){
