@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Parser</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    
+
+    <div class="widthWrapper">
+        <h1>KinkSheet</h1>
+        <div id="ExportWrapper">  
+        <input type="text" id="URL">
+        <button id="Export">Export</button>
+        <div id="Loading">Loading</div>
+    </div>
+
+    </div>
+    
+    <!-- File Input to Upload classic.txt -->
+    <label for="fileInput" style="display: none;"><strong>Upload classic.txt file:</strong></label>
+    <input type="file" id="fileInput" accept=".txt" style="display: none;" />
+    
+    <!-- <h2>Parsed Output</h2>
+    <pre id="output"></pre> -->
+
+    <h2 style="display: none;">Parsed Tables</h2>
+    <div id="tables"></div>
+
+    <!-- Include the external parser script -->
+    <script src="main.js"></script>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const fileContent = event.target.result;
+                try {
+                    const parsedData = parseFileContent(fileContent);
+                    // document.getElementById('output').textContent = JSON.stringify(parsedData, null, 2);
+                    displayFormattedTables(parsedData);
+
+                } catch (error) {
+                    document.getElementById('output').textContent = 'Error parsing file: ' + error.message;
+                }
+            };
+
+            reader.readAsText(file);
+        });
+    </script>
+</body>
+</html>
