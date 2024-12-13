@@ -531,6 +531,7 @@ $(function(){
                 hashValues.push(lvlInt);
             });
             var newHash = inputKinks.encode(Object.keys(colors).length, hashValues);
+            console.log(newHash);
         
             localStorage.setItem('kinklistHash', newHash); // Change this line
         },
