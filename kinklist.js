@@ -534,7 +534,18 @@ $(function(){
                 if(!lvlInt) lvlInt = 0;
                 hashValues.push(lvlInt);
             });
-            return inputKinks.encode(Object.keys(colors).length, hashValues);
+        
+            // Store the current scroll position before updating the hash
+            var scrollPos = window.pageYOffset;
+        
+            // Call the encode function, and if it updates the window hash, this will prevent scrolling
+            var newHash = inputKinks.encode(Object.keys(colors).length, hashValues);
+        
+            // Update the hash without scrolling to the top
+            window.location.hash = newHash;
+        
+            // Restore the scroll position
+            window.scrollTo(0, scrollPos);
         },
         parseHash: function(){
             var hash = location.hash.substring(1);
