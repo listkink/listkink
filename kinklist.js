@@ -159,7 +159,13 @@ $(function(){
                 $categories.push($category);
             }
             inputKinks.placeCategories($categories);
+            
+            window.addEventListener('hashchange', function(e) {
+                e.preventDefault();
+                return false; // Prevents scrolling
+            }, false);
 
+            
             // Make things update hash
             $('#InputList').find('button.choice').on('click touchstart', function(){
                 location.hash = inputKinks.updateHash();
@@ -180,7 +186,9 @@ $(function(){
             (function(){
 
                 var lastResize = 0;
+                let lastHeight = window.innerHeight;
                 $(window).on('resize', function(){
+                    if (window.innerHeight === lastHeight) return; // Ignore resize caused by keyboard
                     var curTime = (new Date()).getTime();
                     lastResize = curTime;
                     setTimeout(function(){
@@ -189,6 +197,7 @@ $(function(){
                             inputKinks.parseHash();
                         }
                     }, 500);
+                    lastHeight = window.innerHeight; // Update last height
                 });
 
             })();
@@ -643,7 +652,8 @@ $(function(){
         $('#Kinks').val(KinksText.trim());
         $('#EditOverlay').fadeIn();
     });
-    $('#EditOverlay').on('click touchstart', function(){
+    $('#EditOverlay').on('touchstart', function(e){
+        e.preventDefault();
         $(this).fadeOut();
     });
     $('#KinksOK').on('click touchstart', function(){
@@ -660,7 +670,8 @@ $(function(){
         inputKinks.restoreSavedSelection(selection);
         $('#EditOverlay').fadeOut();
     });
-    $('.overlay > *').on('click touchstart', function(e){
+    $('.overlay > *').on('touchstart', function(e){
+        e.preventDefault();
         e.stopPropagation();
     });
     $('#DescriptionOverlay').on('click touchstart', function(){
