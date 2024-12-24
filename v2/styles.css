@@ -1,15 +1,26 @@
+/* GENERAL FIXES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Consistent box model */
+}
+
 /* Style for the radio button container */
 .radio-container {
     display: inline-block;
     position: relative;
     width: 20px;
     height: 20px;
+    -webkit-transform: translateZ(0); /* Fix rendering glitches in Safari */
+    transform: translateZ(0); /* Ensure smooth rendering */
 }
 
 /* Hide the default radio button */
 .radio-container input[type="radio"] {
     opacity: 0;
     position: absolute;
+    -webkit-appearance: none; /* Fix default iOS appearance */
+    appearance: none;
 }
 
 /* Custom radio button visual (span) */
@@ -21,9 +32,12 @@
     line-height: 15px; /* Ensures vertical alignment of the content */
     text-align: center; /* Ensures horizontal alignment */
     border: 1px solid black;
+    background-color: white; /* Explicitly set the background */
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease; /* Smooth transition for color changes */
+    -webkit-transform: translateZ(0); /* Fix Safari rendering issues */
+    transform: translateZ(0);
 }
 
 /* Colors for custom radio buttons (faded) */
@@ -50,6 +64,8 @@
 /* Indicate when a radio button is selected (make it vibrant) */
 .radio-container input[type="radio"]:checked + .radio-custom {
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3); /* Safari compatibility */
+    background-color: white; /* Reset background to white before applying vibrant colors */
 }
 
 .radio-container input[type="radio"]:checked + .radio-custom.radio-white {
@@ -72,100 +88,50 @@
     background-color: rgba(255, 0, 0, 1); /* Vibrant red */
 }
 
-
-
-.category-container{
-width: fit-content;
-}
-
-/* Style for the "Show Explanation" buttons */
-button.show-explanation-btn {
-    width: 16px; /* Use even numbers to avoid sub-pixel rounding */
-    height: 16px; /* Use even numbers to avoid sub-pixel rounding */
-    line-height: normal; /* Use normal line-height to avoid rounding issues */
-    border-radius: 50%; /* Make it a perfect circle */
-    -webkit-border-radius: 50%; /* iOS Safari compatibility */
-    background-color: #007bff; 
-    color: #fff; 
-    border: none; 
-    display: inline-flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-size: 10px; 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
-    -webkit-transition: all 0.3s ease; /* iOS Safari compatibility */
-    box-sizing: border-box; /* Include padding and border in width/height */
-    overflow: hidden; /* Ensure no extra content shows */
-    appearance: none; /* Remove default iOS button styles */
-    -webkit-appearance: none; /* Remove iOS default button styles */
-    padding: 0; /* Ensure no extra padding is applied */
-    margin: 0; /* Ensure no extra margin is applied */
-    transform: scale(1); /* Avoid any accidental scaling */
-}
-
-button.show-explanation-btn:hover {
-    background-color: #0056b3; /* Darker shade of blue on hover */
-}
-
-button.show-explanation-btn:active {
-    background-color: #004085; /* Even darker shade of blue when clicked */
-}
-
-button.show-explanation-btn:focus {
-    outline: none; /* Removes default focus outline */
-}
-
-
-/* Container for all the tables */
-#tables {
-    display: flex; /* Enables flexbox for child elements (tables) */
-    flex-wrap: wrap; /* Allows tables to wrap to the next row if they don't fit */
-    gap: 20px; /* Space between each table (adjust as needed) */
-    justify-content: space-evenly; /* Aligns items to the left; can use 'center' or 'space-between' if desired */
-}
-
-/* Each category container (which holds subcategories and their tables) */
+/* CATEGORY CONTAINER */
 .category-container {
-    width: fit-content; /* Ensures it only takes up as much space as needed */
-    display: flex; /* Make the category container use flex */
-    flex-direction: column; /* Stack subcategories vertically within a category */
-    margin: 10px; /* Optional: Adds some space between categories */
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    -webkit-transform: translateZ(0); /* Prevent rendering issues */
+    transform: translateZ(0);
 }
 
-/* Each subcategory container (which holds a single table) */
+/* Subcategory container styles */
 .subcategory-container {
-    margin-bottom: 20px; /* Space below each subcategory to prevent them from stacking too tightly */
-    width: fit-content; /* Ensures it only takes up as much space as needed */
+    margin-bottom: 20px;
+    width: fit-content;
 }
 
-/* Table general styles */
+/* TABLE STYLES */
 table {
-    border-collapse: collapse; /* Ensures that the borders do not have space between them */
-    width: auto; /* Ensures tables don't stretch to fit their parent */
+    border-collapse: collapse; /* No space between borders */
+    width: auto; /* Table adjusts to content */
 }
 
 th, td {
-    border: 1px solid black; /* Thin black border for all cells */
-    padding: 8px; /* Adds space within cells */
-    text-align: left; /* Aligns text to the left */
+    border: 1px solid black !important; /* Force border rendering */
+    padding: 8px; /* Space inside cells */
+    text-align: left;
+    background-color: white; /* Explicit white background */
 }
 
 tr {
-    background-color: #f9f9f9; /* Optional: Zebra stripe effect */
+    background-color: #f9f9f9; /* Zebra stripe effect for rows */
 }
 
-.widthWrapper{
-    font-family: 'Verdana','Arial';
+/* EXPORT AND LOADING STYLES */
+.widthWrapper {
+    font-family: 'Verdana', 'Arial', sans-serif;
     font-size: 10px;
     max-width: 1700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     position: relative;
 }
 
-#ExportWrapper{
-    font-family: 'Verdana','Arial';
+#ExportWrapper {
+    font-family: 'Verdana', 'Arial', sans-serif;
     font-size: 12px;
     width: 460px;
     height: 36px;
@@ -173,7 +139,6 @@ tr {
     top: -3px;
     right: 46px;
 }
-
 
 #Export {
     position: absolute;
@@ -184,14 +149,14 @@ tr {
     font-size: 18px;
     width: 150px;
     height: 36px;
-    border-style: none;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     right: 0;
 }
 
-#URL{
+#URL {
     display: none;
     position: absolute;
     top: 3px;
@@ -207,8 +172,8 @@ tr {
     font-weight: 700;
 }
 
-#Loading{
-    font-family: 'Verdana','Arial';
+#Loading {
+    font-family: 'Verdana', 'Arial', sans-serif;
     display: none;
     overflow: visible;
     line-height: 26px;
@@ -218,4 +183,42 @@ tr {
     position: absolute;
     top: 4px;
     left: 220px;
+}
+
+/* BUTTON FIXES */
+button.show-explanation-btn {
+    width: 16px;
+    height: 16px;
+    line-height: normal;
+    border-radius: 50%;
+    -webkit-border-radius: 50%; /* iOS Safari compatibility */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    box-sizing: border-box;
+    overflow: hidden;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0;
+    margin: 0;
+    transform: scale(1);
+}
+
+button.show-explanation-btn:hover {
+    background-color: #0056b3;
+}
+
+button.show-explanation-btn:active {
+    background-color: #004085;
+}
+
+button.show-explanation-btn:focus {
+    outline: none;
 }
